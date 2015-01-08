@@ -23,12 +23,11 @@ module.exports = function (opts) {
 			var fileOpts = objectAssign({}, opts, {
 				filename: file.path,
 				filenameRelative: file.relative,
-				sourceMap: !!file.sourceMap
 			});
 
 			var res = to5.transform(file.contents.toString(), fileOpts);
 
-			if (file.sourceMap && res.map) {
+			if (file.sourceMap && file.sourceMap !== 'inline'  && res.map) {
 				applySourceMap(file, res.map);
 			}
 
